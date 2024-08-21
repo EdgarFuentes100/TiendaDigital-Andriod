@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Contenido principal -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <!-- Barra de arrastre -->
+        <View
+            android:layout_width="4dp"
+            android:layout_height="48dp"
+            android:background="@drawable/drawe_handle"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp" />
+
+        <!-- Encabezado principal -->
+        <LinearLayout
+            android:id="@+id/encabezado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/background"
+            android:padding="16dp">
+
+            <!-- Texto "Información" -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Información"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:layout_weight="1" />
+
+            <!-- Icono del carrito -->
+            <ImageView
+                android:id="@+id/Compra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/shopping" />
+        </LinearLayout>
+
+        <!-- Contenido principal adicional -->
+        <FrameLayout
+            android:id="@+id/frameContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/encabezado">
+        </FrameLayout>
+
+    </RelativeLayout>
+
+    <!-- Contenido deslizable (drawer) -->
+    <include
+        layout="@layout/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"/>
+</androidx.drawerlayout.widget.DrawerLayout>

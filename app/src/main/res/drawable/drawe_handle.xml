@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Capa para la sombra en el centro -->
+    <item>
+        <shape android:shape="rectangle">
+            <!-- Gradiente vertical para simular sombra -->
+            <gradient
+                android:startColor="@android:color/transparent"
+                android:centerColor="@android:color/darker_gray"
+                android:endColor="@android:color/transparent"
+                android:angle="0"/>
+            <size android:width="4dp" android:height="40dp"/> <!-- Ancho y alto de la barra -->
+        </shape>
+    </item>
+
+    <!-- Capa para la barra en sí -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/darker_gray"/> <!-- Color de la barra -->
+            <size android:width="4dp" android:height="40dp"/> <!-- Ancho y alto de la barra -->
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,62 @@
+package com.example.myappstore;
+
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+
+import com.example.myappstore.Https.ApiCliente;
+import com.example.myappstore.Utils.AuthManager;
+import com.example.myappstore.Utils.MainActivityHelper;
+
+public class MainActivity extends AppCompatActivity {
+
+    private AuthManager authManager;
+    private TextView textViewName, textViewEmail, textViewId, textViewAut;
+    private Button bttLogout;
+    private ImageView imageViewMenu, imageUser;
+    private MainActivityHelper helper;
+    private FrameLayout frameContainer;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        authManager = new AuthManager(this);
+        new ApiCliente().execute();
+
+        Toast.makeText(this, "Main Started", Toast.LENGTH_SHORT).show(); // Verifica si esta línea se ejecuta
+        textViewName = findViewById(R.id.textViewName);
+        textViewEmail = findViewById(R.id.textViewEmail);
+        textViewId = findViewById(R.id.textViewId);
+        textViewAut = findViewById(R.id.textViewAut);
+        imageViewMenu = findViewById(R.id.Compra);
+        imageUser = findViewById(R.id.foto);
+        bttLogout = findViewById(R.id.bttLogout);
+        frameContainer = findViewById(R.id.frameContainer); // Ensure this ID is in your layout
+
+        // Get the FragmentManager from the Activity
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        // Initialize the helper with the UI components and FragmentManager
+        helper = new MainActivityHelper(this, textViewName, textViewEmail, textViewId, textViewAut, imageViewMenu, imageUser, fragmentManager);
+
+        // Use the helper to display user data
+        helper.displayUserData();
+
+        // Set up the PopupMenu using the helper
+        helper.setupPopupMenu();
+
+        // Set up the logout button
+        bttLogout.setOnClickListener(view -> authManager.signOut());
+
+        // Load the appropriate fragment
+        helper.loadAppropriateFragment();
+    }
+}

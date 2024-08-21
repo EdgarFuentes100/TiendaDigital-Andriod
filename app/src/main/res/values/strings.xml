@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MyAppStore</string>
+    <string name="server_client_id">315860106163-4o0bcjrrcdd85j61rgvsj1e6imggeoib.apps.googleusercontent.com</string>
+    <string name="Opcion1">Agregar productos</string>
+    <string name="Opcion2">Agregar categorias</string>
+    <string name="Opcion3">Asigar rol</string>
+    <string name="Opcion4">Otro</string>
+</resources>
