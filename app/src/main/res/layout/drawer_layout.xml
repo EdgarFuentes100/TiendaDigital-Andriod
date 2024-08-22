@@ -20,25 +20,35 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:gravity="center_vertical"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp">
+            android:layout_marginStart="13dp">
 
+            <!-- Nombre del Usuario -->
             <TextView
                 android:id="@+id/textViewName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:text="Name:"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:gravity="center_vertical" />
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_horizontal"/>
 
-            <!-- Imagen para ocupar espacio al final del LinearLayout Interno -->
+            <!-- Email del Usuario -->
+            <TextView
+                android:id="@+id/textViewEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email: "
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_horizontal"/>
         </LinearLayout>
 
+        <!-- Imagen para el usuario -->
         <ImageView
             android:id="@+id/foto"
             android:layout_width="40dp"
@@ -51,22 +61,12 @@
             android:layout_marginStart="10dp"/>
     </LinearLayout>
 
-
     <!-- Información del usuario -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
-
-        <TextView
-            android:id="@+id/textViewEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Email: "
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="8dp" />
 
         <TextView
             android:id="@+id/textViewId"

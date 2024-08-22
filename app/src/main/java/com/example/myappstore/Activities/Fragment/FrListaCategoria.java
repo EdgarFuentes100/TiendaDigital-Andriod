@@ -1,4 +1,5 @@
 package com.example.myappstore.Activities.Fragment;
+import com.example.myappstore.MainActivity;
 import com.example.myappstore.Utils.AlertDialogBase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,13 +19,20 @@ public class FrListaCategoria extends Fragment {
 
         ImageView imageView = view.findViewById(R.id.idElementCategoria);
         imageView.setOnClickListener(v -> showCustomDialog());
-
+        ajustarTexto();
         return view;
     }
 
     private void showCustomDialog() {
         AlertDialogBase dialogFragment = new AlertDialogBase(R.layout.activity_crud_categoria, false);
         dialogFragment.show(getParentFragmentManager(), "customDialog");
+    }
+
+    private void ajustarTexto(){
+        if (getActivity() instanceof MainActivity) {
+            MainActivity mainActivity = (MainActivity) getActivity();
+            mainActivity.updateTextView("Lista de Categorias", true);
+        }
     }
 }
 

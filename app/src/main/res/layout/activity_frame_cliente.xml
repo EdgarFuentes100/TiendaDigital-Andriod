@@ -8,42 +8,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-                <!-- Texto -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Lista de categorias"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="5dp"/>
-                <!-- Línea divisoria -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="3dp"
-            android:layout_marginTop="5dp"
+            android:padding="1dp"
+            android:layout_marginTop="1dp"
             android:background="@android:color/transparent"
-            android:gravity="center_vertical">
+            android:gravity="center">
 
-                <!-- Imagen para el campo de búsqueda -->
+                <!-- Botón centrado -->
                 <Button
                     android:id="@+id/open_fragment_button"
                     android:layout_width="wrap_content"
                     android:layout_height="43dp"
                     android:text="Ver todos los productos"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
                     android:background="@drawable/button_background"
-                    android:layout_marginStart="8dp"/>
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp" />
         </LinearLayout>
 
         <ScrollView

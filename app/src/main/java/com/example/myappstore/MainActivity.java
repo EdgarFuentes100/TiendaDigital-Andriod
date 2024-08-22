@@ -1,5 +1,5 @@
 package com.example.myappstore;
-
+import android.view.Gravity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -17,7 +17,7 @@ import com.example.myappstore.Utils.MainActivityHelper;
 public class MainActivity extends AppCompatActivity {
 
     private AuthManager authManager;
-    private TextView textViewName, textViewEmail, textViewId, textViewAut;
+    private TextView textViewName, textViewEmail, textViewId, textViewAut, myTextView;;
     private Button bttLogout;
     private ImageView imageViewMenu, imageUser;
     private MainActivityHelper helper;
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         imageUser = findViewById(R.id.foto);
         bttLogout = findViewById(R.id.bttLogout);
         frameContainer = findViewById(R.id.frameContainer); // Ensure this ID is in your layout
-
+        myTextView = findViewById(R.id.idInformacion); // Asumiendo que tienes un TextView con este ID
         // Get the FragmentManager from the Activity
         FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -59,4 +59,15 @@ public class MainActivity extends AppCompatActivity {
         // Load the appropriate fragment
         helper.loadAppropriateFragment();
     }
+
+    // Método para actualizar el TextView
+    public void updateTextView(String text, boolean center) {
+        if (myTextView != null) {
+            myTextView.setText(text);
+            if (center){
+                myTextView.setGravity(Gravity.CENTER);
+            }
+        }
+    }
 }
+

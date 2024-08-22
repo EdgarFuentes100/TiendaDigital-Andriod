@@ -5,29 +5,6 @@
     android:orientation="vertical"
     android:padding="12dp">
 
-    <!-- Contenedor para texto y línea divisoria -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <!-- Texto -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="CATEGORIAS"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
-
-        <!-- Línea divisoria -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
-
-    </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,6 +45,11 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="5dp"/>
 
     <!-- Encabezado fijo -->
     <LinearLayout

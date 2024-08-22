@@ -1,5 +1,9 @@
 package com.example.myappstore.Activities.Fragment;
+
+import com.example.myappstore.MainActivity;
 import com.example.myappstore.R;
+import com.example.myappstore.Utils.FragmentTransactionHelper;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,33 +14,36 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 public class ClienteFragment extends Fragment {
+
+    private FragmentTransactionHelper fragmentTransactionHelper;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_frame_cliente, container, false);
 
+        // Inicializa el FragmentTransactionHelper
+        FragmentManager fragmentManager = getParentFragmentManager(); // O usa requireActivity().getSupportFragmentManager()
+        fragmentTransactionHelper = new FragmentTransactionHelper(fragmentManager);
+
         // Configura el botón para abrir el fragmento
         Button openFragmentButton = view.findViewById(R.id.open_fragment_button);
-        openFragmentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openDetailFragment();
-            }
-        });
+        openFragmentButton.setOnClickListener(v -> openDetailFragment());
+        ajustarTexto();
 
         return view;
     }
 
     private void openDetailFragment() {
         Fragment fragment = new FrClienteProducto(); // Usa el fragmento simple para pruebas
-        FragmentManager fragmentManager = getParentFragmentManager(); // Usa getParentFragmentManager() o requireActivity().getSupportFragmentManager()
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frameContainer, fragment);
-        transaction.addToBackStack(null); // Agrega la transacción a la pila de retroceso
-        transaction.commit();
+        fragmentTransactionHelper.replaceFragment(fragment, true);
+    }
+    private void ajustarTexto(){
+        if (getActivity() instanceof MainActivity) {
+            MainActivity mainActivity = (MainActivity) getActivity();
+            mainActivity.updateTextView("Categorias", false);
+        }
     }
 }

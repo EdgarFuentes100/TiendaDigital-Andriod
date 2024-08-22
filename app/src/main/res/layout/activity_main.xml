@@ -29,6 +29,7 @@
 
             <!-- Texto "Información" -->
             <TextView
+                android:id="@+id/idInformacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Información"

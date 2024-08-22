@@ -1,6 +1,7 @@
 package com.example.myappstore.Activities.Fragment;
-import  com.example.myappstore.R;
-
+import com.example.myappstore.MainActivity;
+import com.example.myappstore.R;
+import com.example.myappstore.Utils.FragmentTransactionHelper;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,43 +15,36 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class AdminFragment extends Fragment {
 
+    private FragmentTransactionHelper fragmentTransactionHelper;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_frame_admin, container, false);
 
+        // Inicializa el FragmentTransactionHelper
+        FragmentManager fragmentManager = getParentFragmentManager(); // O usa requireActivity().getSupportFragmentManager()
+        fragmentTransactionHelper = new FragmentTransactionHelper(fragmentManager);
+
         LinearLayout linearLayout = view.findViewById(R.id.IdCrudCategoria);
         LinearLayout linearLayout1 = view.findViewById(R.id.IdCrudProducto);
         LinearLayout linearLayout2 = view.findViewById(R.id.IdCrudUsuario);
 
-        linearLayout.setOnClickListener(v -> openDetailFragment());
-        linearLayout1.setOnClickListener(v -> openDetailFragment1());
-        linearLayout2.setOnClickListener(v -> openDetailFragment2());
+        linearLayout.setOnClickListener(v -> openDetailFragment(new FrListaCategoria()));
+        linearLayout1.setOnClickListener(v -> openDetailFragment(new FrListaProductos()));
+        linearLayout2.setOnClickListener(v -> openDetailFragment(new FrListaUsuarios()));
+        ajustarTexto();
 
         return view;
     }
-    private void openDetailFragment() {
-        Fragment fragment = new FrListaCategoria(); // Usa el fragmento simple para pruebas
-        FragmentManager fragmentManager = getParentFragmentManager(); // Usa getParentFragmentManager() o requireActivity().getSupportFragmentManager()
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frameContainer, fragment);
-        transaction.addToBackStack(null); // Agrega la transacción a la pila de retroceso
-        transaction.commit();
+
+    private void openDetailFragment(Fragment fragment) {
+        fragmentTransactionHelper.replaceFragment(fragment, true);
     }
-    private void openDetailFragment1() {
-        Fragment fragment = new FrListaProductos(); // Usa el fragmento simple para pruebas
-        FragmentManager fragmentManager = getParentFragmentManager(); // Usa getParentFragmentManager() o requireActivity().getSupportFragmentManager()
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frameContainer, fragment);
-        transaction.addToBackStack(null); // Agrega la transacción a la pila de retroceso
-        transaction.commit();
-    }
-    private void openDetailFragment2() {
-        Fragment fragment = new FrListaUsuarios(); // Usa el fragmento simple para pruebas
-        FragmentManager fragmentManager = getParentFragmentManager(); // Usa getParentFragmentManager() o requireActivity().getSupportFragmentManager()
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frameContainer, fragment);
-        transaction.addToBackStack(null); // Agrega la transacción a la pila de retroceso
-        transaction.commit();
+    private void ajustarTexto(){
+        if (getActivity() instanceof MainActivity) {
+            MainActivity mainActivity = (MainActivity) getActivity();
+            mainActivity.updateTextView("Informacion", true);
+        }
     }
 }

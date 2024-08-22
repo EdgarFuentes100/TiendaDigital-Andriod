@@ -16,8 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
-            android:padding="28dp">
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:src="@drawable/aling"
+                android:layout_gravity="center" />
 
             <TextView
                 android:layout_width="wrap_content"
