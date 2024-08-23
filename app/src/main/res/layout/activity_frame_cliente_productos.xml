@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="12dp">
+    style="@style/PrincipalLiner">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="3dp"
-        android:layout_marginTop="5dp"
-        android:background="@android:color/transparent"
-        android:gravity="center_vertical">
+        style="@style/LinearLayoutHead">
 
-        <!-- Imagen para el campo de búsqueda -->
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,11 +28,7 @@
     </LinearLayout>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent"
-        android:padding="12dp"
-        android:scrollbars="none">
+        style="@style/Scroll">
 
         <!-- Contenedor principal para los cuadros -->
         <GridLayout
@@ -52,16 +38,16 @@
             android:columnCount="2"
             android:orientation="horizontal">
 
-
             <!-- Cuadro 1 -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
                 android:layout_columnWeight="1"
                 android:background="@drawable/rounded_linearlayout"
                 android:orientation="vertical"
-                android:padding="8dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
                 android:gravity="center">
 
                 <ImageView
@@ -94,15 +80,15 @@
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="16sp" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
                 android:layout_columnWeight="1"
                 android:background="@drawable/rounded_linearlayout"
                 android:orientation="vertical"
-                android:padding="8dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
                 android:gravity="center">
 
                 <ImageView
@@ -135,15 +121,15 @@
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="16sp" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
                 android:layout_columnWeight="1"
                 android:background="@drawable/rounded_linearlayout"
                 android:orientation="vertical"
-                android:padding="8dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
                 android:gravity="center">
 
                 <ImageView
@@ -176,15 +162,15 @@
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="16sp" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
                 android:layout_columnWeight="1"
                 android:background="@drawable/rounded_linearlayout"
                 android:orientation="vertical"
-                android:padding="8dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
                 android:gravity="center">
 
                 <ImageView
