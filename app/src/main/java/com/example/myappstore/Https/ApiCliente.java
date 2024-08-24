@@ -1,36 +1,19 @@
 package com.example.myappstore.Https;
-import android.os.AsyncTask;
-import android.util.Log;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+public class ApiCliente {
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+    private static Retrofit retrofit;
+    private static final String BASE_URL = "http://192.168.211.52:8011/";
 
-public class ApiCliente extends AsyncTask<Void, Void, String> {
-
-    @Override
-    protected String doInBackground(Void... voids) {
-        String result = "";
-        try {
-            URL url = new URL("http://192.168.211.52:8010/cursos/v1/usuarios/Rol/1");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                result += line;
-            }
-            reader.close();
-        } catch (Exception e) {
-            Log.e("ApiClient", "Error al conectar con la API", e);
+    public static Retrofit getRetrofitInstance() {
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            return retrofit;
         }
-        return result;
-    }
-
-    @Override
-    protected void onPostExecute(String result) {
-        // Muestra el resultado en la consola de Logcat
-        Log.d("ApiClient", "Resultado de la API: " + result);
+        return retrofit;
     }
 }

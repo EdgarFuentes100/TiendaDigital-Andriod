@@ -55,6 +55,9 @@ public class AlertDialogBase extends DialogFragment {
         BaseConfigurator configurator = configuratorMap.get(layoutResId);
         if (configurator != null) {
             configurator.configureDialog(dialogView, this); // Pasa el DialogFragment a configureDialog
+
+            Bundle arguments = getArguments();
+            configurator.configureDialogWithArguments(dialogView, arguments);
         }
 
         return alertDialog;
