@@ -22,6 +22,14 @@ public class FragmentTransactionHelper {
 
     // Método con Bundle
     public void replaceFragment(Fragment fragment, boolean addToBackStack, Bundle args) {
+        // Verificar si el fragment ya está agregado
+        Fragment existingFragment = fragmentManager.findFragmentById(CONTAINER_ID);
+
+        if (existingFragment != null && existingFragment.getClass().equals(fragment.getClass())) {
+            // El fragment ya está agregado y es del mismo tipo, solo mostrarlo
+            return;
+        }
+
         if (args != null) {
             fragment.setArguments(args);
         }
