@@ -62,30 +62,12 @@
     </LinearLayout>
 
     <!-- Información del usuario -->
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/draweContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <TextView
-            android:id="@+id/textViewId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Id: "
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="8dp" />
-
-        <TextView
-            android:id="@+id/textViewAut"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Aut: "
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="16dp" />
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_below="@id/encabezado">
+    </FrameLayout>
 
     <!-- Espacio flexible para empujar el botón hacia abajo -->
     <View

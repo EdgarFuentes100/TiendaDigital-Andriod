@@ -1,6 +1,7 @@
 package com.example.myappstore.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.myappstore.Activities.Fragment.FrDraweCliente;
 import com.example.myappstore.Activities.Fragment.FrHistorialProducto;
 import com.example.myappstore.Activities.Fragment.FrMiscomprasPoducto;
 import com.example.myappstore.R;
@@ -14,25 +15,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivityHelper {
 
     private Context context;
-    private TextView textViewName, textViewEmail, textViewId, textViewAut;
+    private TextView textViewName, textViewEmail;
     private ImageView imageViewMenu, imageUser;
     private SharedPreferences sharedPreferences;
     private FragmentTransactionHelper fragmentTransactionHelper;
+    FragmentManager fragmentManager;
 
-    public MainActivityHelper(Context context, TextView textViewName, TextView textViewEmail, TextView textViewId, TextView textViewAut, ImageView imageViewMenu, ImageView imageUser, FragmentManager fragmentManager) {
+    public MainActivityHelper(Context context, TextView textViewName, TextView textViewEmail, ImageView imageViewMenu, ImageView imageUser, FragmentManager fragmentManager) {
         this.context = context;
         this.textViewName = textViewName;
         this.textViewEmail = textViewEmail;
-        this.textViewId = textViewId;
-        this.textViewAut = textViewAut;
         this.imageViewMenu = imageViewMenu;
         this.imageUser = imageUser;
         this.sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         this.fragmentTransactionHelper = new FragmentTransactionHelper(fragmentManager);
+        this.fragmentManager = fragmentManager;
     }
 
     public void displayUserData() {
@@ -43,9 +45,7 @@ public class MainActivityHelper {
         String photoUrl = sharedPreferences.getString("photoUrl", null);
 
         textViewName.setText((name != null ? name : "N/A"));
-        textViewEmail.setText("Email: " + (email != null ? email : "N/A"));
-        textViewId.setText("Id: " + (id != null ? id : "N/A"));
-        textViewAut.setText("Aut: " + (aut != null ? aut : "N/A"));
+        textViewEmail.setText((email != null ? email : "N/A"));
         if (photoUrl != null && !photoUrl.isEmpty()) {
             Glide.with(context)
                     .load(photoUrl)
@@ -93,6 +93,16 @@ public class MainActivityHelper {
 
     private boolean shouldLoadAdminLayout() {
         String name = sharedPreferences.getString("name", "N/A");
+        replaceFragment(new FrDraweCliente(), false);
         return "Edgar Fuentes".equals(name);
+    }
+
+    public void replaceFragment(Fragment fragment, boolean addToBackStack) {
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.draweContainer, fragment);
+        if (addToBackStack) {
+            transaction.addToBackStack(null);
+        }
+        transaction.commit();
     }
 }

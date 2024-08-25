@@ -1,4 +1,6 @@
 package com.example.myappstore.Utils;
+
+import android.os.Bundle;
 import com.example.myappstore.R;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -13,12 +15,24 @@ public class FragmentTransactionHelper {
         this.fragmentManager = fragmentManager;
     }
 
+    // Método con Bundle opcional
     public void replaceFragment(Fragment fragment, boolean addToBackStack) {
+        replaceFragment(fragment, addToBackStack, null);
+    }
+
+    // Método con Bundle
+    public void replaceFragment(Fragment fragment, boolean addToBackStack, Bundle args) {
+        if (args != null) {
+            fragment.setArguments(args);
+        }
+
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(CONTAINER_ID, fragment);
+
         if (addToBackStack) {
             transaction.addToBackStack(null);
         }
+
         transaction.commit();
     }
 }

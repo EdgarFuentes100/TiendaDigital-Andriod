@@ -15,7 +15,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,8 +43,8 @@ public class ClienteFragment extends Fragment {
         fragmentTransactionHelper = new FragmentTransactionHelper(fragmentManager);
 
         // Configura el botón para abrir el fragmento
-        Button openFragmentButton = view.findViewById(R.id.open_fragment_button);
-        openFragmentButton.setOnClickListener(v -> openDetailFragment());
+        LinearLayout linearLayout = view.findViewById(R.id.open_fragment_button);
+        linearLayout.setOnClickListener(v -> openDetailFragment());
         ajustarTexto();
 
         obtenerCategorias();
@@ -75,7 +77,6 @@ public class ClienteFragment extends Fragment {
 
             @Override
             public void onResponseList(List<Categoria> response) {
-                Log.e("","" + response);
                 // Limpiar el GridLayout antes de agregar nuevos elementos
                 gridLayout.removeAllViews();
 
@@ -120,11 +121,22 @@ public class ClienteFragment extends Fragment {
 
         nombre.setText(categoria.getCategoria());
         descripcion.setText(categoria.getDescripcion());
+        String ID = String.valueOf(categoria.getIdCategoria());
 
         // Aquí puedes cargar la imagen con una biblioteca como Glide o Picasso si es necesario
         // Ejemplo usando Glide:
         // Glide.with(this).load(producto.getImagenUrl()).into(imagen);
-
+        itemView.setOnClickListener(v -> showCustomDialog(ID));
         return itemView;
     }
+    private void showCustomDialog(String id){
+        Toast.makeText(getContext(), "CLICK: " + id, Toast.LENGTH_SHORT).show();
+
+        FrClienteProducto fragment = new FrClienteProducto();
+        Bundle args = new Bundle();
+        args.putString("id_key", id); // Usa una clave adecuada para el argumento
+        fragment.setArguments(args);
+        fragmentTransactionHelper.replaceFragment(fragment, true);
+    }
+
 }

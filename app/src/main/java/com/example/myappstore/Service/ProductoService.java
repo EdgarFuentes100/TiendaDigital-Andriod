@@ -17,8 +17,6 @@ public class ProductoService {
 
     public ProductoService() {
         productoApi = ApiCliente.getRetrofitInstance().create(IProducto.class);
-        String texto = String.valueOf(ApiCliente.getRetrofitInstance().create(IProducto.class));
-        Log.e("", ""+ texto);
     }
     public void obtenerProductoPorId(String id, final CallBackApi<Producto> callback) {
         Call<List<Producto>> call = productoApi.obtenerProductoPorId(id);

@@ -25,7 +25,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private AuthManager authManager;
-    private TextView textViewName, textViewEmail, textViewId, textViewAut, myTextView;;
+    private TextView textViewName, textViewEmail, myTextView;
     private Button bttLogout;
     private ImageView imageViewMenu, imageUser;
     private MainActivityHelper helper;
@@ -42,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Main Started", Toast.LENGTH_SHORT).show(); // Verifica si esta línea se ejecuta
         textViewName = findViewById(R.id.textViewName);
         textViewEmail = findViewById(R.id.textViewEmail);
-        textViewId = findViewById(R.id.textViewId);
-        textViewAut = findViewById(R.id.textViewAut);
         imageViewMenu = findViewById(R.id.Compra);
         imageUser = findViewById(R.id.foto);
         bttLogout = findViewById(R.id.bttLogout);
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         // Initialize the helper with the UI components and FragmentManager
-        helper = new MainActivityHelper(this, textViewName, textViewEmail, textViewId, textViewAut, imageViewMenu, imageUser, fragmentManager);
+        helper = new MainActivityHelper(this, textViewName, textViewEmail, imageViewMenu, imageUser, fragmentManager);
 
         // Use the helper to display user data
         helper.displayUserData();

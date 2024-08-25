@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/PrincipalLiner">
-
         <LinearLayout
+            android:id="@+id/open_fragment_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="1dp"
-            android:layout_marginTop="1dp"
-            android:background="@android:color/transparent"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/rounded_linearlayout"
             android:gravity="center">
 
-                <!-- Botón centrado -->
-                <Button
-                    android:id="@+id/open_fragment_button"
+                <TextView
+                    android:id="@+id/CategoriaNombre"
                     android:layout_width="wrap_content"
-                    android:layout_height="43dp"
+                    android:layout_height="wrap_content"
                     android:text="Ver todos los productos"
-                    android:gravity="center"
-                    android:background="@drawable/button_background"
-                    android:layout_marginTop="2dp"/>
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
         </LinearLayout>
-
         <ScrollView
             style="@style/Scroll">
+
                 <GridLayout
                     android:id="@+id/grid_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:columnCount="1"
                     android:orientation="horizontal">
+
                 </GridLayout>
         </ScrollView>
 </LinearLayout>
