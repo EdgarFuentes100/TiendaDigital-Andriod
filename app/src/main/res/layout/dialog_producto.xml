@@ -6,13 +6,13 @@
     android:background="@drawable/rounded_dialog_background"
     android:padding="16dp">
 
-    <!-- Imagen del producto -->
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/baseline_shopping_cart_24" />
+    <!-- ViewPager2 para mostrar las imágenes -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scaleType="fitCenter" />
 
     <!-- Nombre del producto -->
     <TextView
@@ -74,7 +74,6 @@
             android:gravity="center_vertical" />
 
     </LinearLayout>
-
 
     <!-- Botón para aceptar -->
     <Button

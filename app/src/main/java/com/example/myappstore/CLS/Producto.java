@@ -3,10 +3,12 @@ package com.example.myappstore.CLS;
 public class Producto {
     private int idProducto;
     private String nombre;
+    private String primeraImagen;
     private String descripcion;
     private int stock;
     private double precio;
     private int idCategoria;
+
 
     public Producto() {
     }
@@ -25,6 +27,14 @@ public class Producto {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getPrimeraImagen() {
+        return primeraImagen;
+    }
+
+    public void setPrimeraImagen(String image) {
+        this.primeraImagen = image;
     }
 
     public String getDescripcion() {

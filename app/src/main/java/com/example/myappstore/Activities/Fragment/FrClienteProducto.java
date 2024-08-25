@@ -5,9 +5,13 @@ import com.example.myappstore.MainActivity;
 import com.example.myappstore.Service.ProductoService;
 import com.example.myappstore.R;
 import com.example.myappstore.Utils.AlertDialogBase;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -166,17 +170,41 @@ public class FrClienteProducto extends Fragment {
         nombre.setText(producto.getNombre());
         descripcion.setText(producto.getDescripcion());
         precio.setText(String.format("$%.2f", producto.getPrecio()));
+        String base64Image = producto.getPrimeraImagen();
 
+
+        if (base64Image != null && !base64Image.isEmpty()) {
+            // Convertir base64 a Bitmap
+            Bitmap bitmap = decodeBase64ToBitmap(base64Image, 200, 200);
+            imagen.setImageBitmap(bitmap);
+        } else {
+            // Establecer una imagen predeterminada si no hay imagen disponible
+            imagen.setImageResource(R.drawable.shop);
+        }
         // Carga de imagen (opcional)
         // Glide.with(this).load(producto.getImagenUrl()).into(imagen);
 
         itemView.setOnClickListener(v -> showCustomDialog(producto));
         return itemView;
     }
+    public static Bitmap decodeBase64ToBitmap(String base64String, int width, int height) {
+        // Decodificar la cadena base64 a bytes
+        byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
+        // Convertir los bytes a Bitmap
+        Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        // Redimensionar el Bitmap si es necesario
+        if (bitmap != null) {
+            bitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
+        }
+        return bitmap;
+    }
+
 
     private void showCustomDialog(Producto producto) {
         AlertDialogBase dialogFragment = new AlertDialogBase(R.layout.dialog_producto, false);
         Bundle args = new Bundle();
+        args.putString("idProducto", String.valueOf(producto.getIdProducto()));
         args.putString("nombre", producto.getNombre());
         args.putString("descripcion", producto.getDescripcion());
         args.putDouble("precio", producto.getPrecio());
