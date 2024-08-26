@@ -1,4 +1,4 @@
 package com.example.myappstore.Interface;
 
-public interface DetallePedido {
+public interface IDetallePedido {
 }
