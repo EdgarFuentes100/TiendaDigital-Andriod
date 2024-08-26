@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/producto_imagen"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:scaleType="centerCrop"
         android:src="@drawable/baseline_shopping_cart_24" />
 

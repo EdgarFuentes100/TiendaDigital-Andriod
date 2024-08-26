@@ -130,8 +130,6 @@ public class ClienteFragment extends Fragment {
         return itemView;
     }
     private void showCustomDialog(String id){
-        Toast.makeText(getContext(), "CLICK: " + id, Toast.LENGTH_SHORT).show();
-
         FrClienteProducto fragment = new FrClienteProducto();
         Bundle args = new Bundle();
         args.putString("id_key", id); // Usa una clave adecuada para el argumento

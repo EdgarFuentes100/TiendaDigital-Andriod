@@ -1,4 +1,5 @@
 package com.example.myappstore.Activities.Configurators;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,18 +12,8 @@ public class FrProgramCategoriaCrud extends BaseConfigurator {
 
     @Override
     public void configureDialog(View dialogView, DialogFragment dialogFragment) {
-        TextView idTextView = dialogView.findViewById(R.id.textViewId);
         Button cancelButton = dialogView.findViewById(R.id.buttonCancel);
         Button acceptButton = dialogView.findViewById(R.id.buttonAccept);
-        EditText categoryEditText = dialogView.findViewById(R.id.editTextCategory);
-
-        if (idTextView != null) {
-            idTextView.setText("ID: 123");
-        }
-
-        if (categoryEditText != null) {
-            categoryEditText.setHint("Ingrese categoría");
-        }
 
         if (cancelButton != null) {
             cancelButton.setOnClickListener(v -> {
@@ -34,12 +25,27 @@ public class FrProgramCategoriaCrud extends BaseConfigurator {
 
         if (acceptButton != null) {
             acceptButton.setOnClickListener(v -> {
-                String category = categoryEditText.getText().toString();
-                Toast.makeText(dialogView.getContext(), "CRUDCATEGORIA: " + category, Toast.LENGTH_SHORT).show();
                 if (dialogFragment != null) {
                     dialogFragment.dismiss(); // Cierra solo el diálogo
                 }
             });
+        }
+    }
+    public void configureDialogWithArguments(View dialogView, Bundle arguments) {
+        if (arguments != null) {
+            TextView idCategoria = dialogView.findViewById(R.id.textViewId);
+            TextView categoria = dialogView.findViewById(R.id.editTextCategory);
+            TextView descripcion = dialogView.findViewById(R.id.editDescripcion);
+
+            if (idCategoria != null) {
+                idCategoria.setText(arguments.getString("idCategoria"));
+            }
+            if (categoria != null) {
+                categoria.setText(arguments.getString("categoria"));
+            }
+            if (descripcion != null) {
+                descripcion.setText(arguments.getString("descripcion"));
+            }
         }
     }
 }

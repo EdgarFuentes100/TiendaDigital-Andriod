@@ -8,6 +8,8 @@ public class Producto {
     private int stock;
     private double precio;
     private int idCategoria;
+    ///IMPLEMENTADOR POR LA CATEGORIA
+    private  String categoria;
 
 
     public Producto() {
@@ -67,5 +69,12 @@ public class Producto {
 
     public void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
+    }
+    public String  getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

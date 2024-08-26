@@ -62,7 +62,7 @@
 
                 <!-- Campo para ID (solo lectura, no editable) -->
                 <TextView
-                    android:id="@+id/textViewId"
+                    android:id="@+id/editIdP"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_edit_text"
@@ -103,7 +103,7 @@
 
                 <!-- Campo de categoría (editable) -->
                 <EditText
-                    android:id="@+id/editTextCategory"
+                    android:id="@+id/editNombreP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_edit_text"
@@ -144,6 +144,7 @@
 
                 <!-- Campo de descripción (editable) -->
                 <EditText
+                    android:id="@+id/editDescripcionP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_edit_text"
@@ -183,6 +184,7 @@
 
                 <!-- Campo de descripción (editable) -->
                 <Spinner
+                    android:id="@+id/editIdCategoriaP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_edit_text"
@@ -223,6 +225,7 @@
 
                 <!-- Campo de descripción (editable) -->
                 <EditText
+                    android:id="@+id/editPrecioP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_edit_text"
@@ -235,6 +238,56 @@
             </LinearLayout>
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp">
+
+                <!-- Campo de descripción (editable) -->
+                <Button
+                    android:id="@+id/bttAgregar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_edit_text"
+                    android:hint="Agregar"
+                    android:inputType="text"
+                    android:minHeight="10dp"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/black" />
+            </LinearLayout>
+
+            <!-- Contenedor para los botones -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal">
+                <ImageView
+                    android:id="@+id/Img1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
+                    android:background="@color/white"
+                    android:layout_marginEnd="4dp"/>
+                <ImageView
+                    android:id="@+id/Img2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
+                    android:background="@color/white"
+                    android:layout_marginEnd="4dp"/>
+
+                <ImageView
+                    android:id="@+id/Img3"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
+                    android:background="@color/white"/>
+
+        </LinearLayout>
             <!-- Contenedor para los botones -->
             <LinearLayout
                 android:layout_width="match_parent"

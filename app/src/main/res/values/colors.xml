@@ -5,4 +5,5 @@
     <color name="white">#DDDCDC</color>
     <color name="drawer_indicator_color">#FF0000</color>
     <color name="rounded_text">#CCCCCC</color>
+    <color name="select_color">#C0BAC1</color>
 </resources>

@@ -8,6 +8,7 @@ import com.example.myappstore.Utils.AlertDialogBase;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -78,9 +79,6 @@ public class FrClienteProducto extends Fragment {
         // Limpiar el texto del EditText
         if (searchEditText != null) {
             searchEditText.setText("");
-            // Actualizar la lista de productos si es necesario
-            // Por ejemplo, puedes volver a obtener todos los productos
-            obtenerProductos();
         }
     }
 
@@ -171,7 +169,6 @@ public class FrClienteProducto extends Fragment {
         descripcion.setText(producto.getDescripcion());
         precio.setText(String.format("$%.2f", producto.getPrecio()));
         String base64Image = producto.getPrimeraImagen();
-
 
         if (base64Image != null && !base64Image.isEmpty()) {
             // Convertir base64 a Bitmap

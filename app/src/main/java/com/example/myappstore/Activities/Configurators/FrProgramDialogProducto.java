@@ -26,7 +26,6 @@ public class FrProgramDialogProducto extends BaseConfigurator {
         Button acceptButton = dialogView.findViewById(R.id.acceptButton);
         viewPager = dialogView.findViewById(R.id.viewPager);
 
-
         if (acceptButton != null) {
             acceptButton.setOnClickListener(v -> {
                 Toast.makeText(dialogView.getContext(), "PRODUCTO: ", Toast.LENGTH_SHORT).show();
@@ -58,8 +57,10 @@ public class FrProgramDialogProducto extends BaseConfigurator {
                 cantidad.setText("1");
             }
 
-            int idProducto = arguments.getInt("idProducto");
-            obtenerImagenes(1);
+            String idProductoString = arguments.getString("idProducto");
+            int idProducto = Integer.parseInt(idProductoString); // Convertir de String a int
+            // Usar idProducto como int
+            obtenerImagenes(idProducto);
         }
     }
 

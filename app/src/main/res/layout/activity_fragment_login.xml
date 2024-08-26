@@ -6,7 +6,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="570dp"
+        android:layout_height="500dp"
         android:layout_alignParentBottom="true"
         app:cardElevation="4dp"
         app:cardBackgroundColor="@color/white"
@@ -17,12 +17,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center">
-
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="30dp"
-                android:src="@drawable/aling"
-                android:layout_gravity="center" />
 
             <TextView
                 android:layout_width="wrap_content"

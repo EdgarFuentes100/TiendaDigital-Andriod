@@ -7,21 +7,27 @@
     android:background="@drawable/rounded_linearlayout"
     android:gravity="center">
 
-    <ImageView
-        android:id="@+id/CategoriaImg"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/baseline_shopping_cart_24" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="top|center">
+
+        <ImageView
+            android:id="@+id/CategoriaImg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/category" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/CategoriaNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="Nombre"
         android:textColor="@android:color/black"
-        android:textSize="16sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/CategoriaDescripcion"

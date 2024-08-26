@@ -4,6 +4,7 @@ public class Usuario {
     private String correo;
     private String nombre;
     private int idRol;
+    private String rol;
 
     public Usuario() {
     }
@@ -38,5 +39,12 @@ public class Usuario {
 
     public void setIdRol(int idRol) {
         this.idRol = idRol;
+    }
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }
