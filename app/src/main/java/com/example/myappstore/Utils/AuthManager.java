@@ -5,12 +5,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.widget.Toast;
+
+import com.example.myappstore.CLS.Usuario;
+import com.example.myappstore.Https.CallBackApi;
+import com.example.myappstore.Service.UsuarioService;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+
+import java.util.List;
+
+import retrofit2.Response;
 
 public class AuthManager {
 
@@ -53,14 +61,7 @@ public class AuthManager {
                         editor.putString("photoUrl", photoUrl.toString());
                     }
                     editor.apply();
-
-                    // Mostrar mensaje de éxito y redirigir al usuario
-                    Toast.makeText(context, "Sign in successful", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context, MainActivity.class);
-                    context.startActivity(intent);
-                    if (context instanceof LoginActivity) {
-                        ((LoginActivity) context).finish();
-                    }
+                    obtenerUsuarioRol(account.getEmail());
                 } else {
                     // Token está vacío o nulo
                     Toast.makeText(context, "Sign in failed: Token is empty", Toast.LENGTH_SHORT).show();
@@ -70,6 +71,50 @@ public class AuthManager {
                 Toast.makeText(context, "Sign in failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void obtenerUsuarioRol(String email){
+        UsuarioService us = new UsuarioService();
+        us.obtenerUsuariosPorEmail(email, new CallBackApi<Usuario>() {
+            @Override
+            public void onResponse(Usuario response) {
+
+            }
+
+            @Override
+            public void onResponseBool(Response<Boolean> response) {
+
+            }
+
+            @Override
+            public void onResponseList(List<Usuario> response) {
+                if (response != null && !response.isEmpty()) {
+                    // Obtener el primer usuario de la lista
+                    Usuario usuario = response.get(0);
+
+                    // Guardar el rol y otros datos en SharedPreferences
+                    SharedPreferences sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("rol", usuario.getRol()); // Suponiendo que `getRol()` devuelve el rol del usuario
+                    editor.apply();
+                } else {
+                    Toast.makeText(context, "No user found with email: " + email, Toast.LENGTH_SHORT).show();
+                    ///ACA SE MANEJA PA INSERCION DEL USUARIO
+                }
+
+                Toast.makeText(context, "Sign in successful", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, MainActivity.class);
+                context.startActivity(intent);
+                if (context instanceof LoginActivity) {
+                    ((LoginActivity) context).finish();
+                }
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Toast.makeText(context, "Plus Authentication Error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void signOut() {

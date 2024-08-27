@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class Pedido {
     private int idPedido;
     private int idUsuario;
-    private Timestamp fechaPedido;
+    private String fechaPedido;
     private String estado;
     private double total;
 
@@ -28,11 +28,11 @@ public class Pedido {
         this.idUsuario = idUsuario;
     }
 
-    public Timestamp getFechaPedido() {
+    public String getFechaPedido() {
         return fechaPedido;
     }
 
-    public void setFechaPedido(Timestamp fechaPedido) {
+    public void setFechaPedido(String fechaPedido) {
         this.fechaPedido = fechaPedido;
     }
 

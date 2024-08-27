@@ -87,14 +87,14 @@ public class MainActivityHelper {
         } else {
             fragment = new ClienteFragment();
             imageViewMenu.setVisibility(ImageView.VISIBLE);
+            replaceFragment(new FrDraweCliente(), false);
         }
         fragmentTransactionHelper.replaceFragment(fragment, false);
     }
 
     private boolean shouldLoadAdminLayout() {
-        String name = sharedPreferences.getString("name", "N/A");
-        replaceFragment(new FrDraweCliente(), false);
-        return "Edgar Fuentes".equals(name);
+        String rol = sharedPreferences.getString("rol", "N/A"); // Suponiendo que la clave es "role"
+        return "admin".equals(rol);
     }
 
     public void replaceFragment(Fragment fragment, boolean addToBackStack) {

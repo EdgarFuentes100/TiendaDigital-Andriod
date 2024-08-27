@@ -1,6 +1,7 @@
 package com.example.myappstore.Activities.Fragment;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Geocoder;
 import android.location.Location;
@@ -17,8 +18,11 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.myappstore.CLS.Pedido;
+import com.example.myappstore.Https.CallBackApi;
 import com.example.myappstore.MainActivity;
 import com.example.myappstore.R;
+import com.example.myappstore.Service.PedidoService;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,6 +31,8 @@ import com.google.android.gms.tasks.Task;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Response;
 
 public class FrMiscomprasPoducto extends Fragment {
 
@@ -49,7 +55,9 @@ public class FrMiscomprasPoducto extends Fragment {
             Toast.makeText(getContext(), "Requesting location...", Toast.LENGTH_SHORT).show();
             getLocation();
         });
-
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("UserPrefs", getContext().MODE_PRIVATE);
+        String email = sharedPreferences.getString("email", "N/A");
+        obtenerPedidos(email);
         ajustarTexto();
         return view;
     }
@@ -126,5 +134,29 @@ public class FrMiscomprasPoducto extends Fragment {
                 Toast.makeText(getContext(), "Permission denied", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    private void obtenerPedidos(String email){
+        PedidoService ps = new PedidoService();
+        ps.obtenerPedidosUsuario(email, new CallBackApi<Pedido>() {
+            @Override
+            public void onResponse(Pedido response) {
+
+            }
+
+            @Override
+            public void onResponseBool(Response<Boolean> response) {
+
+            }
+
+            @Override
+            public void onResponseList(List<Pedido> response) {
+                response.size();
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+
+            }
+        });
     }
 }
