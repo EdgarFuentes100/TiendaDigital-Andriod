@@ -49,7 +49,7 @@ public class UsuarioService {
                         // Suponiendo que solo se espera un usuario con ese email
                         callback.onResponseList(usuarios);
                     } else {
-                        callback.onFailure("No se encontraron usuarios con el correo electrónico proporcionado.");
+                        callback.onResponseList(usuarios);
                     }
                 } else {
                     // Aquí puedes manejar el caso en que la respuesta no sea exitosa
@@ -59,6 +59,24 @@ public class UsuarioService {
 
             @Override
             public void onFailure(Call<List<Usuario>> call, Throwable t) {
+                callback.onFailure("Error en conexión de red: " + t.getMessage());
+            }
+        });
+    }
+    public void insertarUsuario(Usuario usuario, final CallBackApi<Boolean> callback) {
+        Call<Boolean> call = usuarioApi.insertarUsuario(usuario); // Asume que `usuarioApi.insertarUsuario` es tu endpoint para insertar un usuario
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    callback.onResponseBool(response);
+                } else {
+                    callback.onFailure("Error en la respuesta del servidor: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
                 callback.onFailure("Error en conexión de red: " + t.getMessage());
             }
         });

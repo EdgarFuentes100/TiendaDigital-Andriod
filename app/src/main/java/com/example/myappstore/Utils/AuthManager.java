@@ -73,46 +73,83 @@ public class AuthManager {
         }
     }
 
-    private void obtenerUsuarioRol(String email){
+    private void obtenerUsuarioRol(String email) {
         UsuarioService us = new UsuarioService();
         us.obtenerUsuariosPorEmail(email, new CallBackApi<Usuario>() {
             @Override
             public void onResponse(Usuario response) {
-
+                // Este método no se usa actualmente
             }
 
             @Override
             public void onResponseBool(Response<Boolean> response) {
-
+                // Manejo de respuesta de la inserción
             }
 
             @Override
             public void onResponseList(List<Usuario> response) {
+                SharedPreferences sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
                 if (response != null && !response.isEmpty()) {
                     // Obtener el primer usuario de la lista
                     Usuario usuario = response.get(0);
-
-                    // Guardar el rol y otros datos en SharedPreferences
-                    SharedPreferences sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("rol", usuario.getRol()); // Suponiendo que `getRol()` devuelve el rol del usuario
                     editor.apply();
+                    proceedToNextActivity();
                 } else {
-                    Toast.makeText(context, "No user found with email: " + email, Toast.LENGTH_SHORT).show();
-                    ///ACA SE MANEJA PA INSERCION DEL USUARIO
-                }
-
-                Toast.makeText(context, "Sign in successful", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, MainActivity.class);
-                context.startActivity(intent);
-                if (context instanceof LoginActivity) {
-                    ((LoginActivity) context).finish();
+                    // Usuario no existe, inserción del nuevo usuario
+                    Usuario usuario = new Usuario();
+                    usuario.setCorreo(email);
+                    usuario.setNombre(sharedPreferences.getString("name", "N/A"));
+                    usuario.setIdRol(2); // Establecer un rol por defecto si es necesario
+                    insertarUsuario(usuario);
                 }
             }
 
             @Override
             public void onFailure(String errorMessage) {
-                Toast.makeText(context, "Plus Authentication Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Authentication Error: " + errorMessage, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void insertarUsuario(Usuario usuario) {
+        UsuarioService us = new UsuarioService();
+        us.insertarUsuario(usuario, new CallBackApi<Boolean>() {
+            @Override
+            public void onResponse(Boolean response) {
+
+            }
+
+            @Override
+            public void onResponseBool(Response<Boolean> response) {
+                if (response != null && response.isSuccessful()) {
+                    Boolean success = response.body();
+                    if (success != null && success) {
+                        // Usuario insertado exitosamente
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("rol", usuario.getRol());
+                        editor.apply();
+                        proceedToNextActivity();
+                    } else {
+                        // Error al insertar el usuario
+                        Toast.makeText(context, "Error al insertar el usuario", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    // Error en la respuesta del servidor
+                    Toast.makeText(context, "Error en la respuesta del servidor: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onResponseList(List<Boolean> response) {
+                Toast.makeText(context, "Error al insertar el usuario", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Toast.makeText(context, "Error al insertar el usuario: " + errorMessage, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -135,5 +172,14 @@ public class AuthManager {
                 ((MainActivity) context).finish();
             }
         });
+    }
+    private void proceedToNextActivity() {
+        // Acción a realizar después de insertar o encontrar el usuario.
+        Toast.makeText(context, "Sign in successful", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+        if (context instanceof LoginActivity) {
+            ((LoginActivity) context).finish();
+        }
     }
 }
