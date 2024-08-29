@@ -16,20 +16,10 @@
             android:id="@+id/idVerProducto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_linearlayout"
             android:orientation="horizontal"
             android:padding="8dp"
             android:layout_marginBottom="12dp"
             android:gravity="center_vertical">
-
-            <!-- Imagen (Ícono) -->
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="@string/Opcion1"
-                android:scaleType="centerInside"
-                android:src="@drawable/baseline_shopping_cart_24" />
 
             <!-- Texto -->
             <TextView
@@ -41,24 +31,22 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
+        <!-- Línea de división -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Rectángulo con icono y texto -->
         <LinearLayout
             android:id="@+id/idVerCategroia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_linearlayout"
             android:orientation="horizontal"
             android:padding="8dp"
             android:layout_marginBottom="12dp"
             android:gravity="center_vertical">
-
-            <!-- Imagen (Ícono) -->
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="@string/Opcion2"
-                android:scaleType="centerInside"
-                android:src="@drawable/baseline_shopping_cart_24" />
 
             <!-- Texto -->
             <TextView
@@ -70,25 +58,22 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
+        <!-- Línea de división -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Rectángulo con icono y texto -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_linearlayout"
             android:orientation="horizontal"
             android:padding="8dp"
             android:layout_marginBottom="12dp"
             android:gravity="center_vertical">
 
-            <!-- Imagen (Ícono) -->
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="@string/Opcion2"
-                android:scaleType="centerInside"
-                android:src="@drawable/baseline_shopping_cart_24" />
-
-            <!-- Texto -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

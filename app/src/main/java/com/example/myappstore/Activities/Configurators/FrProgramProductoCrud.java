@@ -1,6 +1,10 @@
 package com.example.myappstore.Activities.Configurators;
+
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -8,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.myappstore.CLS.Categoria;
@@ -23,11 +29,50 @@ import java.util.List;
 import retrofit2.Response;
 
 public class FrProgramProductoCrud extends BaseConfigurator {
+    private static final int[] IMAGE_VIEW_IDS = {R.id.Img1, R.id.Img2, R.id.Img3}; // IDs de los ImageView
+    private ImageView imageViewToUpdate; // Variable para mantener la referencia del ImageView que debe actualizarse
+    private View dialogView;
+    private ActivityResultLauncher<Intent> imagePickerLauncher;
+    private List<Bitmap> bitmaps = new ArrayList<>(); // Lista de bitmaps cargados
 
     @Override
     public void configureDialog(View dialogView, DialogFragment dialogFragment) {
+        bitmaps.clear();
+        this.dialogView = dialogView; // Guardar referencia a la vista del diálogo
         Button cancelButton = dialogView.findViewById(R.id.buttonCancel);
         Button acceptButton = dialogView.findViewById(R.id.buttonAccept);
+        Button agregarButton = dialogView.findViewById(R.id.bttAgregar);
+
+        // Inicializar el launcher de resultados para seleccionar imágenes
+        imagePickerLauncher = dialogFragment.registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == android.app.Activity.RESULT_OK && result.getData() != null) {
+                        Uri imageUri = result.getData().getData();
+                        if (imageViewToUpdate != null) {
+                            imageViewToUpdate.setImageURI(imageUri);
+                            Bitmap bitmap = getBitmapFromUri(imageUri);
+                            if (bitmap != null) {
+                                bitmaps.add(bitmap);
+                                updateImageViews(dialogView, bitmaps);
+                            }
+                            imageViewToUpdate = null; // Reset imageViewToUpdate after use
+                            checkImageViewsFull(); // Check if all ImageViews are full
+                        }
+                    }
+                }
+        );
+
+        agregarButton.setOnClickListener(v -> {
+            ImageView imageView = getFirstAvailableImageView(dialogView);
+            if (imageView != null) {
+                imageViewToUpdate = imageView; // Guarda la referencia del ImageView
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                imagePickerLauncher.launch(intent); // Usa el launcher para abrir la galería
+            } else {
+                Toast.makeText(dialogView.getContext(), "Todos los espacios están llenos", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         if (cancelButton != null) {
             cancelButton.setOnClickListener(v -> {
@@ -45,6 +90,39 @@ public class FrProgramProductoCrud extends BaseConfigurator {
                 }
             });
         }
+    }
+
+    private Bitmap getBitmapFromUri(Uri imageUri) {
+        try {
+            return MediaStore.Images.Media.getBitmap(dialogView.getContext().getContentResolver(), imageUri);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private void checkImageViewsFull() {
+        boolean allFull = true;
+        for (int id : IMAGE_VIEW_IDS) {
+            ImageView imageView = dialogView.findViewById(id);
+            if (imageView.getDrawable() == null) {
+                allFull = false;
+                break;
+            }
+        }
+        if (allFull) {
+            Toast.makeText(dialogView.getContext(), "Todos los espacios están llenos", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private ImageView getFirstAvailableImageView(View dialogView) {
+        for (int id : IMAGE_VIEW_IDS) {
+            ImageView imageView = dialogView.findViewById(id);
+            if (imageView != null && imageView.getDrawable() == null) {
+                return imageView;
+            }
+        }
+        return null; // Todos los ImageView están ocupados
     }
 
     public void configureDialogWithArguments(View dialogView, Bundle arguments) {
@@ -121,6 +199,7 @@ public class FrProgramProductoCrud extends BaseConfigurator {
         is.obtenerImagenes(idProducto, new OnImageLoadListener() {
             @Override
             public void onImagesLoad(List<Bitmap> bitmaps) {
+                FrProgramProductoCrud.this.bitmaps = bitmaps; // Actualizar la lista de bitmaps
                 updateImageViews(dialogView, bitmaps);
             }
 
@@ -132,16 +211,14 @@ public class FrProgramProductoCrud extends BaseConfigurator {
     }
 
     private void updateImageViews(View dialogView, List<Bitmap> bitmaps) {
-        int[] imageViewIds = {R.id.Img1, R.id.Img2, R.id.Img3};
-        for (int i = 0; i < imageViewIds.length; i++) {
-            ImageView imageView = dialogView.findViewById(imageViewIds[i]);
+        for (int i = 0; i < IMAGE_VIEW_IDS.length; i++) {
+            ImageView imageView = dialogView.findViewById(IMAGE_VIEW_IDS[i]);
             if (i < bitmaps.size()) {
                 imageView.setImageBitmap(bitmaps.get(i));
                 setLongClickListener(dialogView, imageView, bitmaps, i);
             } else {
                 imageView.setImageDrawable(null);
-                // Eliminar el listener si no hay imagen
-                imageView.setOnLongClickListener(null);
+                imageView.setOnLongClickListener(null); // Eliminar el listener si no hay imagen
             }
         }
     }
@@ -150,7 +227,6 @@ public class FrProgramProductoCrud extends BaseConfigurator {
         imageView.setOnLongClickListener(v -> {
             if (index >= 0 && index < bitmaps.size()) {
                 bitmaps.remove(index);
-                // Actualizar los ImageView después de eliminar
                 updateImageViews(dialogView, bitmaps);
                 showToast(dialogView, "Imagen eliminada");
                 return true;
@@ -158,10 +234,7 @@ public class FrProgramProductoCrud extends BaseConfigurator {
             return false; // Return false to indicate the long click event is not handled
         });
     }
-
-
     private void showToast(View dialogView, String message) {
         Toast.makeText(dialogView.getContext(), message, Toast.LENGTH_SHORT).show();
     }
 }
-

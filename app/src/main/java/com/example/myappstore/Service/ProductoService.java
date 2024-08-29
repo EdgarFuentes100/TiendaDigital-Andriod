@@ -57,4 +57,23 @@ public class ProductoService {
             }
         });
     }
+    public void obtenerTodoProductoSinImagen(final CallBackApi<Producto> callback) {
+        Call<List<Producto>> call = productoApi.obtenerTodoProductoSinImagen();
+        call.enqueue(new Callback<List<Producto>>() {
+            @Override
+            public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
+                if (response.isSuccessful()) {
+                    List<Producto> productos = response.body();
+                    callback.onResponseList(productos);
+                } else {
+                    // Aquí puedes manejar el caso en que la respuesta no sea exitosa
+                    callback.onFailure("Error en la respuesta del servidor: " + response.code());
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Producto>> call, Throwable t) {
+                callback.onFailure("Error en conexión de red: " + t.getMessage());
+            }
+        });
+    }
 }

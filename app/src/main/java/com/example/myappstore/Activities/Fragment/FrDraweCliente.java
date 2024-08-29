@@ -41,5 +41,9 @@ public class FrDraweCliente extends Fragment {
         } else {
             Toast.makeText(getContext(), "FragmentTransactionHelper no está inicializado", Toast.LENGTH_SHORT).show();
         }
+        if (getActivity() instanceof MainActivity) {
+            MainActivity mainActivity = (MainActivity) getActivity();
+            mainActivity.closeDrawer();
+        }
     }
 }

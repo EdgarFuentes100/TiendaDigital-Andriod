@@ -4,7 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/rounded_dialog_background"
-    android:padding="16dp">
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/closeIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="top|end"
+        android:src="@drawable/baseline_close_24"
+        android:layout_marginBottom="5dp"/>
 
     <!-- ViewPager2 para mostrar las imágenes -->
     <androidx.viewpager2.widget.ViewPager2
@@ -76,12 +84,15 @@
     </LinearLayout>
 
     <!-- Botón para aceptar -->
+
     <Button
         android:id="@+id/acceptButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
-        android:text="Aceptar"
+        android:text="Agregar al carrito"
+        android:layout_gravity="right"
+
         android:textColor="@android:color/white"
         android:background="@drawable/button_background" />
 

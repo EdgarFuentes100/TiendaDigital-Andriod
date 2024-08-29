@@ -94,6 +94,8 @@ public class AuthManager {
                     // Obtener el primer usuario de la lista
                     Usuario usuario = response.get(0);
                     editor.putString("rol", usuario.getRol()); // Suponiendo que `getRol()` devuelve el rol del usuario
+                    int idUsuario = usuario.getIdUsuario();
+                    editor.putString("idUsuario", String.valueOf(idUsuario));
                     editor.apply();
                     proceedToNextActivity();
                 } else {
@@ -115,41 +117,36 @@ public class AuthManager {
 
     private void insertarUsuario(Usuario usuario) {
         UsuarioService us = new UsuarioService();
-        us.insertarUsuario(usuario, new CallBackApi<Boolean>() {
+        us.insertarUsuario(usuario, new CallBackApi<Usuario>() {
             @Override
-            public void onResponse(Boolean response) {
-
-            }
-
-            @Override
-            public void onResponseBool(Response<Boolean> response) {
-                if (response != null && response.isSuccessful()) {
-                    Boolean success = response.body();
-                    if (success != null && success) {
-                        // Usuario insertado exitosamente
-                        SharedPreferences sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("rol", usuario.getRol());
-                        editor.apply();
-                        proceedToNextActivity();
-                    } else {
-                        // Error al insertar el usuario
-                        Toast.makeText(context, "Error al insertar el usuario", Toast.LENGTH_SHORT).show();
-                    }
+            public void onResponse(Usuario response) {
+                if (response != null) {
+                    int idUsuario = response.getIdUsuario();
+                    SharedPreferences sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("idUsuario", String.valueOf(idUsuario));
+                    editor.putString("rol", usuario.getRol());
+                    editor.apply();
+                    proceedToNextActivity();
                 } else {
-                    // Error en la respuesta del servidor
-                    Toast.makeText(context, "Error en la respuesta del servidor: " + response.code(), Toast.LENGTH_SHORT).show();
+                    // Manejar el caso cuando la respuesta es null
+                    Toast.makeText(context, "Respuesta vacía del servidor.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onResponseList(List<Boolean> response) {
-                Toast.makeText(context, "Error al insertar el usuario", Toast.LENGTH_SHORT).show();
+            public void onResponseBool(Response<Boolean> response) {
+
+            }
+
+            @Override
+            public void onResponseList(List<Usuario> response) {
+
             }
 
             @Override
             public void onFailure(String errorMessage) {
-                Toast.makeText(context, "Error al insertar el usuario: " + errorMessage, Toast.LENGTH_SHORT).show();
+
             }
         });
     }

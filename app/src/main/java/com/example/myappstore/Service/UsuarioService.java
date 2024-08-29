@@ -1,6 +1,7 @@
 package com.example.myappstore.Service;
 
 import com.example.myappstore.CLS.Categoria;
+import com.example.myappstore.CLS.Pedido;
 import com.example.myappstore.CLS.Usuario;
 import com.example.myappstore.Https.ApiCliente;
 import com.example.myappstore.Https.CallBackApi;
@@ -63,20 +64,21 @@ public class UsuarioService {
             }
         });
     }
-    public void insertarUsuario(Usuario usuario, final CallBackApi<Boolean> callback) {
-        Call<Boolean> call = usuarioApi.insertarUsuario(usuario); // Asume que `usuarioApi.insertarUsuario` es tu endpoint para insertar un usuario
-        call.enqueue(new Callback<Boolean>() {
+    public void insertarUsuario(Usuario usuario, final CallBackApi<Usuario> callback) {
+        Call<Usuario> call = usuarioApi.insertarUsuario(usuario); // Asume que `usuarioApi.insertarUsuario` es tu endpoint para insertar un usuario
+        call.enqueue(new Callback<Usuario>() {
             @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    callback.onResponseBool(response);
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                if (response.isSuccessful()) {
+                    Usuario usuario = response.body();
+                    callback.onResponse(usuario);
                 } else {
                     callback.onFailure("Error en la respuesta del servidor: " + response.code());
                 }
             }
 
             @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
+            public void onFailure(Call<Usuario> call, Throwable t) {
                 callback.onFailure("Error en conexión de red: " + t.getMessage());
             }
         });

@@ -41,7 +41,7 @@ public class FrListaProductos extends Fragment {
 
     private void obtenerProductos(TableLayout tableLayout){
         ProductoService pd = new ProductoService();
-        pd.obtenerTodoProducto(new CallBackApi<Producto>() {
+        pd.obtenerTodoProductoSinImagen(new CallBackApi<Producto>() {
             @Override
             public void onResponse(Producto response) {
 

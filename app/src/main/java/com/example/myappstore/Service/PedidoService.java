@@ -54,4 +54,24 @@ public class PedidoService {
             }
         });
     }
+
+    public void insertarPedido(Pedido pedido, final CallBackApi<Pedido> callback) {
+        Call<Pedido> call = pedidoApi.insertarPedido(pedido);
+        call.enqueue(new Callback<Pedido>() {
+            @Override
+            public void onResponse(Call<Pedido> call, Response<Pedido> response) {
+                if (response.isSuccessful()) {
+                    Pedido pedido = response.body();
+                    callback.onResponse(pedido);
+                } else {
+                    callback.onFailure("Error en la respuesta del servidor: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Pedido> call, Throwable t) {
+                callback.onFailure("Error en conexión de red: " + t.getMessage());
+            }
+        });
+    }
 }

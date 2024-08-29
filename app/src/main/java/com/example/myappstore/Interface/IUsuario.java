@@ -14,6 +14,6 @@ public interface IUsuario {
     @GET("appStore/v1/usuarios/activos")
     Call<List<Usuario>> obtenerUsuarioEmail(@Query("correo") String email);
     @POST("appStore/v1/usuarios/insertarUsuario")
-    Call<Boolean> insertarUsuario(@Body Usuario usuario);
+    Call<Usuario> insertarUsuario(@Body Usuario usuario);
 
 }

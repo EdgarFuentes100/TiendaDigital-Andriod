@@ -12,4 +12,6 @@ public interface IProducto {
     Call<List<Producto>> obtenerProductoPorId(@Query("categoria_id") String categoriaId);
     @GET("appStore/v1/productos")
     Call<List<Producto>> obtenerTodoProducto();
+    @GET("appStore/v1/productos/productos")
+    Call<List<Producto>> obtenerTodoProductoSinImagen();
 }
