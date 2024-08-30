@@ -41,4 +41,41 @@ public class CategoriaService {
             }
         });
     }
+    public void insertarCategoria(Categoria categoria, final CallBackApi<Categoria> callback) {
+        Call<Categoria> call = categoriaApi.insertarCategoria(categoria);
+        call.enqueue(new Callback<Categoria>() {
+            @Override
+            public void onResponse(Call<Categoria> call, Response<Categoria> response) {
+                if (response.isSuccessful()) {
+                    Categoria result = response.body();
+                    callback.onResponse(result);
+                } else {
+                    callback.onFailure("Error en la respuesta del servidor: " + response.code());
+                }
+            }
+            @Override
+            public void onFailure(Call<Categoria> call, Throwable t) {
+                callback.onFailure("Error en conexión de red: " + t.getMessage());
+            }
+        });
+    }
+
+    public void actualizarCategoria(int id, Categoria categoria, final CallBackApi<Categoria> callback) {
+        Call<Categoria> call = categoriaApi.actualizarCategoria(id, categoria);
+        call.enqueue(new Callback<Categoria>() {
+            @Override
+            public void onResponse(Call<Categoria> call, Response<Categoria> response) {
+                if (response.isSuccessful()) {
+                    Categoria result = response.body();
+                    callback.onResponse(result);
+                } else {
+                    callback.onFailure("Error en la respuesta del servidor: " + response.code());
+                }
+            }
+            @Override
+            public void onFailure(Call<Categoria> call, Throwable t) {
+                callback.onFailure("Error en conexión de red: " + t.getMessage());
+            }
+        });
+    }
 }

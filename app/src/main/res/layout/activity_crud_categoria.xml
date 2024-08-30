@@ -13,21 +13,41 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Texto -->
-        <TextView
-            android:id="@+id/textViewCategories"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="CATEGORIAS"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Texto centrado horizontalmente -->
+            <TextView
+                android:id="@+id/textViewCategories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="CATEGORIAS"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <!-- Imagen alineada a la derecha -->
+            <ImageView
+                android:id="@+id/closeIcon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_close_24"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp" />
+
+        </LinearLayout>
 
         <!-- Línea divisoria -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/darker_gray" />
+
     </LinearLayout>
 
     <ScrollView
@@ -163,20 +183,12 @@
                 android:layout_marginTop="20dp"
                 android:gravity="end">
 
-                <!-- Botón Cancelar -->
-                <Button
-                    android:id="@+id/buttonCancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cancelar"
-                    android:layout_marginEnd="16dp"/>
-
                 <!-- Botón Aceptar -->
                 <Button
                     android:id="@+id/buttonAccept"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Aceptar"/>
+                    android:layout_height="50dp"
+                    android:text="Aceptar cambios"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

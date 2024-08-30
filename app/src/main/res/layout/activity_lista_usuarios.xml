@@ -4,14 +4,8 @@
     <LinearLayout
         style="@style/LinearLayoutHead">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/search"
-            android:layout_marginEnd="5dp"
-            android:layout_marginStart="5dp" />
-
         <EditText
+            android:id="@+id/buscarUsuarios"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -22,6 +16,13 @@
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/darker_gray"
             android:minHeight="20dp"/>
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/delete"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp" />
 
         <ImageView
             android:id="@+id/idElementoUsuario"
@@ -29,7 +30,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/new_element"
             android:layout_marginEnd="5dp"
-            android:layout_marginStart="5dp" />
+            android:layout_marginStart="20dp" />
 
     </LinearLayout>
 

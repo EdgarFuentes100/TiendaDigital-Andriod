@@ -2,6 +2,7 @@ package com.example.myappstore.Service;
 
 import com.example.myappstore.CLS.Categoria;
 import com.example.myappstore.CLS.Pedido;
+import com.example.myappstore.CLS.Producto;
 import com.example.myappstore.CLS.Usuario;
 import com.example.myappstore.Https.ApiCliente;
 import com.example.myappstore.Https.CallBackApi;
@@ -77,6 +78,24 @@ public class UsuarioService {
                 }
             }
 
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable t) {
+                callback.onFailure("Error en conexión de red: " + t.getMessage());
+            }
+        });
+    }
+    public void actualizarUsuario(int id, Usuario usuario, final CallBackApi<Usuario> callback) {
+        Call<Usuario> call = usuarioApi.actualizarUsuario(id, usuario);
+        call.enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                if (response.isSuccessful()) {
+                    Usuario result = response.body();
+                    callback.onResponse(result);
+                } else {
+                    callback.onFailure("Error en la respuesta del servidor: " + response.code());
+                }
+            }
             @Override
             public void onFailure(Call<Usuario> call, Throwable t) {
                 callback.onFailure("Error en conexión de red: " + t.getMessage());

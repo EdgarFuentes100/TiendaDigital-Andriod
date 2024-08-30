@@ -1,4 +1,4 @@
-package com.example.myappstore.Https;
+package com.example.myappstore.Interface.Utils;
 
 import android.graphics.Bitmap;
 

@@ -3,7 +3,6 @@ package com.example.myappstore.Activities.Configurators;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,7 +18,7 @@ import com.example.myappstore.MainActivity;
 import com.example.myappstore.R;
 import com.example.myappstore.Service.DetallePedidoService;
 import com.example.myappstore.Service.ImagenService;
-import com.example.myappstore.Https.OnImageLoadListener;
+import com.example.myappstore.Interface.Utils.OnImageLoadListener;
 import com.example.myappstore.Service.PedidoService;
 import com.example.myappstore.Utils.ImagePagerAdapter;
 

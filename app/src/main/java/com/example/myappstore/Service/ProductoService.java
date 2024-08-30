@@ -76,4 +76,42 @@ public class ProductoService {
             }
         });
     }
+    // Insertar un nuevo producto
+    public void insertarProducto(Producto producto, final CallBackApi<Producto> callback) {
+        Call<Producto> call = productoApi.insertarProducto(producto);
+        call.enqueue(new Callback<Producto>() {
+            @Override
+            public void onResponse(Call<Producto> call, Response<Producto> response) {
+                if (response.isSuccessful()) {
+                    Producto productoInsertado = response.body();
+                    callback.onResponse(productoInsertado);
+                } else {
+                    callback.onFailure("Error en la respuesta del servidor: " + response.code());
+                }
+            }
+            @Override
+            public void onFailure(Call<Producto> call, Throwable t) {
+                callback.onFailure("Error en conexión de red: " + t.getMessage());
+            }
+        });
+    }
+
+    public void actualizarProducto(int idProducto, Producto producto, final CallBackApi<Producto> callback) {
+        Call<Producto> call = productoApi.actualizarProducto(idProducto, producto);
+        call.enqueue(new Callback<Producto>() {
+            @Override
+            public void onResponse(Call<Producto> call, Response<Producto> response) {
+                if (response.isSuccessful()) {
+                    Producto productoActualizado = response.body();
+                    callback.onResponse(productoActualizado);
+                } else {
+                    callback.onFailure("Error en la respuesta del servidor: " + response.code());
+                }
+            }
+            @Override
+            public void onFailure(Call<Producto> call, Throwable t) {
+                callback.onFailure("Error en conexión de red: " + t.getMessage());
+            }
+        });
+    }
 }

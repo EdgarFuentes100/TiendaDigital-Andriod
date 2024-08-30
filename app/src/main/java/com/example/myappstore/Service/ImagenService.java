@@ -4,7 +4,7 @@ import android.graphics.BitmapFactory;
 import android.util.Base64;
 import com.example.myappstore.CLS.Imagen;
 import com.example.myappstore.Https.ApiCliente;
-import com.example.myappstore.Https.OnImageLoadListener;
+import com.example.myappstore.Interface.Utils.OnImageLoadListener;
 import com.example.myappstore.Interface.IImagen;
 import java.util.ArrayList;
 import java.util.List;
